@@ -4,6 +4,7 @@
     Author     : Pluem
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -86,87 +87,27 @@
 
             <!-- Page Features -->
             <div class="row text-center">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img
-                            class="card-img-top"
-                            src="./image/2.png"
-                            alt=""
-                            />
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Sapiente esse necessitatibus neque.
-                            </p>
+                <c:forEach items="${product}" var="p">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card">
+                            <img
+                                class="card-img-top"
+                                src="./image/2.png"
+                                alt=""
+                                />
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Sapiente esse necessitatibus neque.
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img
-                            class="card-img-top"
-                            src="./image/4.png"
-                            alt=""
-                            />
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Explicabo magni sapiente, tempore debitis beatae culpa natus
-                                architecto.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img
-                            class="card-img-top"
-                            src="./image/2.png"
-                            alt=""
-                            />
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Sapiente esse necessitatibus neque.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img
-                            class="card-img-top"
-                            src="./image/4.png"
-                            alt=""
-                            />
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Explicabo magni sapiente, tempore debitis beatae culpa natus
-                                architecto.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
+                    </div>    
+                </c:forEach>   
             </div>
             <!-- /.row -->
         </div>
