@@ -43,6 +43,8 @@ public class LoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         }
         session.setAttribute("loginalert", null);
+        session.setAttribute("logoutshow", null);
+        
     }
 
     @Override
@@ -51,13 +53,14 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         
         if(username.trim().length()>0 && password.trim().length()>0){
             CustomerJpaController controller = new CustomerJpaController(utx, emf);
             Customer customer = controller.findCustomerUsername(username);
             if(customer!=null && password.equals(customer.getPassword())){
                 session.setAttribute("customer", customer);
+                session.setAttribute("logoutshow", "Logout");
                 getServletContext().getRequestDispatcher("/productlist.jsp").forward(request, response);
             }
             else{
