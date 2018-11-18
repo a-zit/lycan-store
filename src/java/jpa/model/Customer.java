@@ -88,6 +88,16 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
+    public Customer(String fname, String lname, String address, String mail, String phone, String username, String password) {
+        this.fname = fname;
+        this.lname = lname;
+        this.address = address;
+        this.mail = mail;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+    }
+    
     public Customer(Integer customerid, String fname, String lname, String address, String mail, String phone, String username, String password) {
         this.customerid = customerid;
         this.fname = fname;
