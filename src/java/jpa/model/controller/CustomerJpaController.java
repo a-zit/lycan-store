@@ -144,6 +144,17 @@ public class CustomerJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Customer findCustomerUsername(String username) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Customer.findByUsername");
+        query.setParameter("username", username);
+        try {
+            return (Customer)query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
 
     public int getCustomerCount() {
         EntityManager em = getEntityManager();
