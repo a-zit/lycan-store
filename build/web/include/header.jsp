@@ -26,6 +26,9 @@
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="login.jsp">Login</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="myBtn" class="cursor nav-link" href="Logout">${logoutshow}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
