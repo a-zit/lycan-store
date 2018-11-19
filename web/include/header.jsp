@@ -17,13 +17,13 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="productlist.jsp">Lycan Store</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-inline my-2 my-lg-0">
+                        <form class="form-inline my-2 my-lg-0 mr-5" >
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         <li class="nav-item"><a class="nav-link" href="favorite.jsp">Favorite</a></li>
                         <li class="nav-item"><a class="nav-link" href="cart.jsp" style="border-right: 3px solid #bec4ce;">Cart ( 2 )</a></li>  

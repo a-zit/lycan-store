@@ -59,7 +59,7 @@
 
             <!-- Page Features -->
             <div class="row text-center">
-                <c:forEach items="${product}" var="p">
+                <c:forEach items="${products}" var="p">
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card">
                             <img
@@ -68,10 +68,9 @@
                                 alt=""
                                 />
                             <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
+                                <h4 class="card-title">${p.productname}</h4>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Sapiente esse necessitatibus neque.
+                                    ${p.productdetail}
                                 </p>
                             </div>
                             <div class="card-footer">
