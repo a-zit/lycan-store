@@ -22,10 +22,11 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="favorite.jsp">Favorite</a></li>
-                        <li class="nav-item"><a class="nav-link" href="cart.jsp" style="border-right: 3px solid #bec4ce;">Cart ( 2 )</a></li>
+                        <li class="nav-item"><a class="nav-link" href="cart.jsp" style="border-right: 3px solid #bec4ce;">Cart ( 2 )</a></li>  
                         <li class="nav-item">
-                            <a id="myBtn" class="cursor nav-link" href="login.jsp">Login</a>
+                            <a id="myBtn" class="cursor nav-link" href="Login">${loginshow}</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link">${customer.username}</a></li>
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="Logout">${logoutshow}</a>
                         </li>
