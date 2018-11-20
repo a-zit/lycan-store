@@ -20,7 +20,7 @@ import jpa.model.controller.exceptions.RollbackFailureException;
 
 /**
  *
- * @author Pluem
+ * @author DEMO TEST
  */
 public class CustomerJpaController implements Serializable {
 

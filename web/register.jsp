@@ -50,7 +50,7 @@
                             <input type="text" class="form-control" id="city" placeholder="City" name="city">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="stateful" placeholder="State" name="stateful">
+                            <input type="text" class="form-control" id="stateful" placeholder="State" name="statefull">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="zipcode" placeholder="Zipcode" name="zipcode">
@@ -59,10 +59,6 @@
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputTelno" placeholder="Tel Number" name="telno" required>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="inputAddress" placeholder="Address" name="address" required>
                         </div>
 
                         <div class="form-group">

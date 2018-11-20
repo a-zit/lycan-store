@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pluem
+ * @author DEMO TEST
  */
 @Entity
 @Table(name = "CUSTOMER")
@@ -31,7 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Customer.findByCustomerid", query = "SELECT c FROM Customer c WHERE c.customerid = :customerid")
     , @NamedQuery(name = "Customer.findByFname", query = "SELECT c FROM Customer c WHERE c.fname = :fname")
     , @NamedQuery(name = "Customer.findByLname", query = "SELECT c FROM Customer c WHERE c.lname = :lname")
-    , @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address")
+    , @NamedQuery(name = "Customer.findByStreet", query = "SELECT c FROM Customer c WHERE c.street = :street")
+    , @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city")
+    , @NamedQuery(name = "Customer.findByStatefull", query = "SELECT c FROM Customer c WHERE c.statefull = :statefull")
+    , @NamedQuery(name = "Customer.findByZipcode", query = "SELECT c FROM Customer c WHERE c.zipcode = :zipcode")
     , @NamedQuery(name = "Customer.findByMail", query = "SELECT c FROM Customer c WHERE c.mail = :mail")
     , @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone")
     , @NamedQuery(name = "Customer.findByUsername", query = "SELECT c FROM Customer c WHERE c.username = :username")
@@ -56,12 +59,27 @@ public class Customer implements Serializable {
     private String lname;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 70)
-    @Column(name = "ADDRESS")
-    private String address;
+    @Size(min = 1, max = 100)
+    @Column(name = "STREET")
+    private String street;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 50)
+    @Column(name = "CITY")
+    private String city;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "STATEFULL")
+    private String statefull;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "ZIPCODE")
+    private String zipcode;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "MAIL")
     private String mail;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
@@ -88,21 +106,27 @@ public class Customer implements Serializable {
         this.customerid = customerid;
     }
 
-    public Customer(String fname, String lname, String address, String mail, String phone, String username, String password) {
+    public Customer(Integer customerid, String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
+        this.customerid = customerid;
         this.fname = fname;
         this.lname = lname;
-        this.address = address;
+        this.street = street;
+        this.city = city;
+        this.statefull = statefull;
+        this.zipcode = zipcode;
         this.mail = mail;
         this.phone = phone;
         this.username = username;
         this.password = password;
     }
-    
-    public Customer(Integer customerid, String fname, String lname, String address, String mail, String phone, String username, String password) {
-        this.customerid = customerid;
+
+    public Customer(String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
         this.fname = fname;
         this.lname = lname;
-        this.address = address;
+        this.street = street;
+        this.city = city;
+        this.statefull = statefull;
+        this.zipcode = zipcode;
         this.mail = mail;
         this.phone = phone;
         this.username = username;
@@ -133,12 +157,36 @@ public class Customer implements Serializable {
         this.lname = lname;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStatefull() {
+        return statefull;
+    }
+
+    public void setStatefull(String statefull) {
+        this.statefull = statefull;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     public String getMail() {

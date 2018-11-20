@@ -47,7 +47,10 @@ public class RegisterServlet extends HttpServlet {
         Customer customer = new Customer( 
                 request.getParameter("fname"), 
                 request.getParameter("lname"), 
-                request.getParameter("address"), 
+                request.getParameter("street"), 
+                request.getParameter("city"), 
+                request.getParameter("statefull"), 
+                request.getParameter("zipcode"), 
                 request.getParameter("email"), 
                 request.getParameter("telno"), 
                 request.getParameter("username"), 

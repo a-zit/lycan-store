@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Pluem
+ * @author DEMO TEST
  */
 @Entity
 @Table(name = "PRODUCT")

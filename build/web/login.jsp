@@ -34,7 +34,7 @@
                             <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" required>
                         </div>
                         <div class="register">
-                            <a href="register.jsp">Register</a>
+                            <a href="Register">Register</a>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
 
