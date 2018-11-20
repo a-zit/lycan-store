@@ -17,15 +17,20 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="productlist.jsp">Lycan Store</a>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="ProductList">Lycan Store</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <form class="form-inline my-2 my-lg-0 mr-5" >
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                         <li class="nav-item"><a class="nav-link" href="favorite.jsp">Favorite</a></li>
-                        <li class="nav-item"><a class="nav-link" href="cart.jsp" style="border-right: 3px solid #bec4ce;">Cart ( 2 )</a></li>
+                        <li class="nav-item"><a class="nav-link" href="cart.jsp" style="border-right: 3px solid #bec4ce;">Cart ( 2 )</a></li>  
                         <li class="nav-item">
-                            <a id="myBtn" class="cursor nav-link" href="login.jsp">Login</a>
+                            <a id="myBtn" class="cursor nav-link" href="Login">${loginshow}</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link">${customer.username}</a></li>
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="Logout">${logoutshow}</a>
                         </li>

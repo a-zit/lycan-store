@@ -56,38 +56,11 @@
                 </p>
                 <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
             </header>
-            <!-- Search -->
-            <div class="mb-4 row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <form class="card card-sm">
-                        <div class="card-body row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <i class="fas fa-search h4 text-body"></i>
-                            </div>
-                            <!-- end of col -->
-                            <div class="col">
-                                <input
-                                    class="form-control form-control-lg form-control-borderless"
-                                    type="search"
-                                    placeholder="Search topics or keywords"
-                                    />
-                            </div>
-                            <!-- end of col -->
-                            <div class="col-auto">
-                                <button class="btn btn-lg btn-success" type="submit">
-                                    Search
-                                </button>
-                            </div>
-                            <!-- end of col -->
-                        </div>
-                    </form>
-                </div>
-                <!-- end of col -->
-            </div>
+            <hr>
 
             <!-- Page Features -->
             <div class="row text-center">
-                <c:forEach items="${product}" var="p">
+                <c:forEach items="${products}" var="p">
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card">
                             <img
@@ -96,10 +69,10 @@
                                 alt=""
                                 />
                             <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
+                                <h4 class="card-title">${p.productname}</h4>
+                                <hr>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Sapiente esse necessitatibus neque.
+                                    ${p.productdetail}
                                 </p>
                             </div>
                             <div class="card-footer">

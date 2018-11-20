@@ -35,15 +35,17 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        session.setAttribute("loginshow", "Login");
         Customer customer = (Customer) session.getAttribute("customer");
         if (customer != null) {
             session.setAttribute("customer", customer);
-            getServletContext().getRequestDispatcher("/productlist.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
         } else {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         }
         session.setAttribute("loginalert", null);
         session.setAttribute("logoutshow", null);
+        
         
     }
 
@@ -61,15 +63,16 @@ public class LoginServlet extends HttpServlet {
             if(customer!=null && password.equals(customer.getPassword())){
                 session.setAttribute("customer", customer);
                 session.setAttribute("logoutshow", "Logout");
-                getServletContext().getRequestDispatcher("/productlist.jsp").forward(request, response);
+                session.setAttribute("loginshow", null);
+                getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
             }
             else{
                 session.setAttribute("loginalert", "Username or Password is Invalid");
-                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/Login").forward(request, response);
             }
         }else{
             session.setAttribute("loginalert", "Please Insert Username and Password");
-            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Login").forward(request, response);
         }
     }
 
