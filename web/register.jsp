@@ -44,8 +44,18 @@
                         </div>
 
                         <div class="form-group">
-
+                            <input type="text" class="form-control" id="street" placeholder="Street" name="street">
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="city" placeholder="City" name="city">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="stateful" placeholder="State" name="stateful">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="zipcode" placeholder="Zipcode" name="zipcode">
+                        </div>
+                        
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputTelno" placeholder="Tel Number" name="telno" required>
