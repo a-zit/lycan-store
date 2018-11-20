@@ -18,7 +18,10 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="ProductList">Lycan Store</a>
+                <a class="navbar-brand" href="ProductList">
+                    <img src="./Images/werewolf.png" width="32" height="32" class="d-inline-block align-top mr-3" alt="" >
+                    LYCAN STORE
+                </a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <form class="form-inline my-2 my-lg-0 mr-5" >
