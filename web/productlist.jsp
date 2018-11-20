@@ -65,8 +65,8 @@
                         <div class="card">
                             <img
                                 class="card-img-top"
-                                src="./image/2.png"
-                                alt=""
+                                src="./Images/${p.productid}.png"
+                                alt="#"
                                 />
                             <div class="card-body">
                                 <h4 class="card-title">${p.productname}</h4>
