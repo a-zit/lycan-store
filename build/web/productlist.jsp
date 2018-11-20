@@ -55,7 +55,8 @@
                     repellat.
                 </p>
                 <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-            </header> 
+            </header>
+            <hr>
 
             <!-- Page Features -->
             <div class="row text-center">
