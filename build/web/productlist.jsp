@@ -76,7 +76,7 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <a href="productDetail.jsp" class="btn btn-primary">Find Out More!</a>
+                                <a href="productdetail.jsp" class="btn btn-primary">Find Out More!</a>
                             </div>
                         </div>
                     </div>    
