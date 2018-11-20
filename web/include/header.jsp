@@ -18,7 +18,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="productlist.jsp">Lycan Store</a>
+                <a class="navbar-brand" href="ProductList">Lycan Store</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <form class="form-inline my-2 my-lg-0 mr-5" >

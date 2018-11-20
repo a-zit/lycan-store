@@ -60,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        getServletContext().getRequestDispatcher("/productlist.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
     }
 
     @Override
