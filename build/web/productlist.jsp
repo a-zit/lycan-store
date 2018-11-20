@@ -69,6 +69,7 @@
                                 />
                             <div class="card-body">
                                 <h4 class="card-title">${p.productname}</h4>
+                                <hr>
                                 <p class="card-text">
                                     ${p.productdetail}
                                 </p>
