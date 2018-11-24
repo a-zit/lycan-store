@@ -70,7 +70,7 @@ public class Product implements Serializable {
     @Column(name = "PRODUCTDETAIL")
     private String productdetail;
     @OneToMany(mappedBy = "productid")
-    private List<Reviewproduct> reviewproductList;
+    private List<Review> reviewList;
 
     public Product() {
     }
@@ -137,12 +137,12 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
-    public List<Reviewproduct> getReviewproductList() {
-        return reviewproductList;
+    public List<Review> getReviewList() {
+        return reviewList;
     }
 
-    public void setReviewproductList(List<Reviewproduct> reviewproductList) {
-        this.reviewproductList = reviewproductList;
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 
     @Override

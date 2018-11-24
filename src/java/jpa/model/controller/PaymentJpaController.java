@@ -14,8 +14,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
-import jpa.model.Product;
-import jpa.model.Reviewproduct;
+import jpa.model.Orders;
+import jpa.model.Payment;
 import jpa.model.controller.exceptions.NonexistentEntityException;
 import jpa.model.controller.exceptions.RollbackFailureException;
 
@@ -23,9 +23,9 @@ import jpa.model.controller.exceptions.RollbackFailureException;
  *
  * @author DEMO TEST
  */
-public class ReviewproductJpaController implements Serializable {
+public class PaymentJpaController implements Serializable {
 
-    public ReviewproductJpaController(UserTransaction utx, EntityManagerFactory emf) {
+    public PaymentJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
@@ -36,20 +36,20 @@ public class ReviewproductJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Reviewproduct reviewproduct) throws RollbackFailureException, Exception {
+    public void create(Payment payment) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Product productid = reviewproduct.getProductid();
-            if (productid != null) {
-                productid = em.getReference(productid.getClass(), productid.getProductid());
-                reviewproduct.setProductid(productid);
+            Orders ordersid = payment.getOrdersid();
+            if (ordersid != null) {
+                ordersid = em.getReference(ordersid.getClass(), ordersid.getOrdersid());
+                payment.setOrdersid(ordersid);
             }
-            em.persist(reviewproduct);
-            if (productid != null) {
-                productid.getReviewproductList().add(reviewproduct);
-                productid = em.merge(productid);
+            em.persist(payment);
+            if (ordersid != null) {
+                ordersid.getPaymentList().add(payment);
+                ordersid = em.merge(ordersid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -66,26 +66,26 @@ public class ReviewproductJpaController implements Serializable {
         }
     }
 
-    public void edit(Reviewproduct reviewproduct) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Payment payment) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Reviewproduct persistentReviewproduct = em.find(Reviewproduct.class, reviewproduct.getReviewid());
-            Product productidOld = persistentReviewproduct.getProductid();
-            Product productidNew = reviewproduct.getProductid();
-            if (productidNew != null) {
-                productidNew = em.getReference(productidNew.getClass(), productidNew.getProductid());
-                reviewproduct.setProductid(productidNew);
+            Payment persistentPayment = em.find(Payment.class, payment.getPaymentid());
+            Orders ordersidOld = persistentPayment.getOrdersid();
+            Orders ordersidNew = payment.getOrdersid();
+            if (ordersidNew != null) {
+                ordersidNew = em.getReference(ordersidNew.getClass(), ordersidNew.getOrdersid());
+                payment.setOrdersid(ordersidNew);
             }
-            reviewproduct = em.merge(reviewproduct);
-            if (productidOld != null && !productidOld.equals(productidNew)) {
-                productidOld.getReviewproductList().remove(reviewproduct);
-                productidOld = em.merge(productidOld);
+            payment = em.merge(payment);
+            if (ordersidOld != null && !ordersidOld.equals(ordersidNew)) {
+                ordersidOld.getPaymentList().remove(payment);
+                ordersidOld = em.merge(ordersidOld);
             }
-            if (productidNew != null && !productidNew.equals(productidOld)) {
-                productidNew.getReviewproductList().add(reviewproduct);
-                productidNew = em.merge(productidNew);
+            if (ordersidNew != null && !ordersidNew.equals(ordersidOld)) {
+                ordersidNew.getPaymentList().add(payment);
+                ordersidNew = em.merge(ordersidNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -96,9 +96,9 @@ public class ReviewproductJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = reviewproduct.getReviewid();
-                if (findReviewproduct(id) == null) {
-                    throw new NonexistentEntityException("The reviewproduct with id " + id + " no longer exists.");
+                Integer id = payment.getPaymentid();
+                if (findPayment(id) == null) {
+                    throw new NonexistentEntityException("The payment with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -114,19 +114,19 @@ public class ReviewproductJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Reviewproduct reviewproduct;
+            Payment payment;
             try {
-                reviewproduct = em.getReference(Reviewproduct.class, id);
-                reviewproduct.getReviewid();
+                payment = em.getReference(Payment.class, id);
+                payment.getPaymentid();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The reviewproduct with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The payment with id " + id + " no longer exists.", enfe);
             }
-            Product productid = reviewproduct.getProductid();
-            if (productid != null) {
-                productid.getReviewproductList().remove(reviewproduct);
-                productid = em.merge(productid);
+            Orders ordersid = payment.getOrdersid();
+            if (ordersid != null) {
+                ordersid.getPaymentList().remove(payment);
+                ordersid = em.merge(ordersid);
             }
-            em.remove(reviewproduct);
+            em.remove(payment);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -142,19 +142,19 @@ public class ReviewproductJpaController implements Serializable {
         }
     }
 
-    public List<Reviewproduct> findReviewproductEntities() {
-        return findReviewproductEntities(true, -1, -1);
+    public List<Payment> findPaymentEntities() {
+        return findPaymentEntities(true, -1, -1);
     }
 
-    public List<Reviewproduct> findReviewproductEntities(int maxResults, int firstResult) {
-        return findReviewproductEntities(false, maxResults, firstResult);
+    public List<Payment> findPaymentEntities(int maxResults, int firstResult) {
+        return findPaymentEntities(false, maxResults, firstResult);
     }
 
-    private List<Reviewproduct> findReviewproductEntities(boolean all, int maxResults, int firstResult) {
+    private List<Payment> findPaymentEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Reviewproduct.class));
+            cq.select(cq.from(Payment.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -166,20 +166,20 @@ public class ReviewproductJpaController implements Serializable {
         }
     }
 
-    public Reviewproduct findReviewproduct(Integer id) {
+    public Payment findPayment(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Reviewproduct.class, id);
+            return em.find(Payment.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getReviewproductCount() {
+    public int getPaymentCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Reviewproduct> rt = cq.from(Reviewproduct.class);
+            Root<Payment> rt = cq.from(Payment.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

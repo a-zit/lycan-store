@@ -6,6 +6,7 @@
 package jpa.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -98,16 +101,13 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "PASSWORD")
     private String password;
+    @OneToMany(mappedBy = "customerid")
+    private List<Orders> ordersList;
 
     public Customer() {
     }
 
-    public Customer(Integer customerid) {
-        this.customerid = customerid;
-    }
-
-    public Customer(Integer customerid, String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
-        this.customerid = customerid;
+    public Customer(String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
         this.fname = fname;
         this.lname = lname;
         this.street = street;
@@ -118,9 +118,17 @@ public class Customer implements Serializable {
         this.phone = phone;
         this.username = username;
         this.password = password;
+        
+    }
+    
+    
+    
+    public Customer(Integer customerid) {
+        this.customerid = customerid;
     }
 
-    public Customer(String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
+    public Customer(Integer customerid, String fname, String lname, String street, String city, String statefull, String zipcode, String mail, String phone, String username, String password) {
+        this.customerid = customerid;
         this.fname = fname;
         this.lname = lname;
         this.street = street;
@@ -219,6 +227,15 @@ public class Customer implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @XmlTransient
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
 
     @Override

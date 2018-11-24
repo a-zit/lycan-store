@@ -57,23 +57,21 @@ public class LoginServlet extends HttpServlet {
         
         HttpSession session = request.getSession(true);
         
-        if(username.trim().length()>0 && password.trim().length()>0){
-            CustomerJpaController controller = new CustomerJpaController(utx, emf);
-            Customer customer = controller.findCustomerUsername(username);
-            if(customer!=null && password.equals(customer.getPassword())){
-                session.setAttribute("customer", customer);
-                session.setAttribute("logoutshow", "Logout");
-                session.setAttribute("loginshow", null);
-                getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
-            }
-            else{
-                session.setAttribute("loginalert", "Username or Password is Invalid");
-                getServletContext().getRequestDispatcher("/Login").forward(request, response);
-            }
-        }else{
-            session.setAttribute("loginalert", "Please Insert Username and Password");
-            getServletContext().getRequestDispatcher("/Login").forward(request, response);
-        }
+        if(username != null && username.trim().length()>0 
+             && password != null && password.trim().length()>0 ){
+            CustomerJpaController customerJpaCtrl = new CustomerJpaController(utx,emf) ;
+            Customer customer = customerJpaCtrl.findCustomerUsername(username) ;
+            if ( customer != null){
+                if (password.equals(customer.getPassword())){
+                    request.getSession().setAttribute("customer", customer);
+                    getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
+                    return ;
+                }
+            } 
+            request.setAttribute("loginalert", "Invalid user name or password !!!");
+          }
+         getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+            
     }
 
     @Override

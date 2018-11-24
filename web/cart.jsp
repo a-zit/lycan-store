@@ -116,7 +116,7 @@
                             
 
                             <div class="text-center">
-                                <button type="button" class="btn btn-outline-warning">CHECKOUT</button>
+                                <a href="payment.jsp"><button type="button" class="btn btn-outline-warning">CHECKOUT</button></a>
                             </div>
                         </div>
                     </div>

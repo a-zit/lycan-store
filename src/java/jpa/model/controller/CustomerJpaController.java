@@ -6,13 +6,15 @@
 package jpa.model.controller;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import jpa.model.Orders;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.model.Customer;
 import jpa.model.controller.exceptions.NonexistentEntityException;
@@ -36,11 +38,29 @@ public class CustomerJpaController implements Serializable {
     }
 
     public void create(Customer customer) throws RollbackFailureException, Exception {
+        if (customer.getOrdersList() == null) {
+            customer.setOrdersList(new ArrayList<Orders>());
+        }
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
+            List<Orders> attachedOrdersList = new ArrayList<Orders>();
+            for (Orders ordersListOrdersToAttach : customer.getOrdersList()) {
+                ordersListOrdersToAttach = em.getReference(ordersListOrdersToAttach.getClass(), ordersListOrdersToAttach.getOrdersid());
+                attachedOrdersList.add(ordersListOrdersToAttach);
+            }
+            customer.setOrdersList(attachedOrdersList);
             em.persist(customer);
+            for (Orders ordersListOrders : customer.getOrdersList()) {
+                Customer oldCustomeridOfOrdersListOrders = ordersListOrders.getCustomerid();
+                ordersListOrders.setCustomerid(customer);
+                ordersListOrders = em.merge(ordersListOrders);
+                if (oldCustomeridOfOrdersListOrders != null) {
+                    oldCustomeridOfOrdersListOrders.getOrdersList().remove(ordersListOrders);
+                    oldCustomeridOfOrdersListOrders = em.merge(oldCustomeridOfOrdersListOrders);
+                }
+            }
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -61,7 +81,34 @@ public class CustomerJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
+            Customer persistentCustomer = em.find(Customer.class, customer.getCustomerid());
+            List<Orders> ordersListOld = persistentCustomer.getOrdersList();
+            List<Orders> ordersListNew = customer.getOrdersList();
+            List<Orders> attachedOrdersListNew = new ArrayList<Orders>();
+            for (Orders ordersListNewOrdersToAttach : ordersListNew) {
+                ordersListNewOrdersToAttach = em.getReference(ordersListNewOrdersToAttach.getClass(), ordersListNewOrdersToAttach.getOrdersid());
+                attachedOrdersListNew.add(ordersListNewOrdersToAttach);
+            }
+            ordersListNew = attachedOrdersListNew;
+            customer.setOrdersList(ordersListNew);
             customer = em.merge(customer);
+            for (Orders ordersListOldOrders : ordersListOld) {
+                if (!ordersListNew.contains(ordersListOldOrders)) {
+                    ordersListOldOrders.setCustomerid(null);
+                    ordersListOldOrders = em.merge(ordersListOldOrders);
+                }
+            }
+            for (Orders ordersListNewOrders : ordersListNew) {
+                if (!ordersListOld.contains(ordersListNewOrders)) {
+                    Customer oldCustomeridOfOrdersListNewOrders = ordersListNewOrders.getCustomerid();
+                    ordersListNewOrders.setCustomerid(customer);
+                    ordersListNewOrders = em.merge(ordersListNewOrders);
+                    if (oldCustomeridOfOrdersListNewOrders != null && !oldCustomeridOfOrdersListNewOrders.equals(customer)) {
+                        oldCustomeridOfOrdersListNewOrders.getOrdersList().remove(ordersListNewOrders);
+                        oldCustomeridOfOrdersListNewOrders = em.merge(oldCustomeridOfOrdersListNewOrders);
+                    }
+                }
+            }
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -95,6 +142,11 @@ public class CustomerJpaController implements Serializable {
                 customer.getCustomerid();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The customer with id " + id + " no longer exists.", enfe);
+            }
+            List<Orders> ordersList = customer.getOrdersList();
+            for (Orders ordersListOrders : ordersList) {
+                ordersListOrders.setCustomerid(null);
+                ordersListOrders = em.merge(ordersListOrders);
             }
             em.remove(customer);
             utx.commit();

@@ -25,7 +25,11 @@
                         <p>Please enter your email and password</p>
                     </div>
                     <form id="Login" action="Login" method="post">
-
+                        
+                        <div class="form-group">
+                            ${loginalert}
+                        </div>
+                        
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputUsername" placeholder="Username" name="username" required>
                         </div>

@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import jpa.model.Reviewproduct;
+import jpa.model.Review;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -38,27 +38,27 @@ public class ProductJpaController implements Serializable {
     }
 
     public void create(Product product) throws RollbackFailureException, Exception {
-        if (product.getReviewproductList() == null) {
-            product.setReviewproductList(new ArrayList<Reviewproduct>());
+        if (product.getReviewList() == null) {
+            product.setReviewList(new ArrayList<Review>());
         }
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            List<Reviewproduct> attachedReviewproductList = new ArrayList<Reviewproduct>();
-            for (Reviewproduct reviewproductListReviewproductToAttach : product.getReviewproductList()) {
-                reviewproductListReviewproductToAttach = em.getReference(reviewproductListReviewproductToAttach.getClass(), reviewproductListReviewproductToAttach.getReviewid());
-                attachedReviewproductList.add(reviewproductListReviewproductToAttach);
+            List<Review> attachedReviewList = new ArrayList<Review>();
+            for (Review reviewListReviewToAttach : product.getReviewList()) {
+                reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewid());
+                attachedReviewList.add(reviewListReviewToAttach);
             }
-            product.setReviewproductList(attachedReviewproductList);
+            product.setReviewList(attachedReviewList);
             em.persist(product);
-            for (Reviewproduct reviewproductListReviewproduct : product.getReviewproductList()) {
-                Product oldProductidOfReviewproductListReviewproduct = reviewproductListReviewproduct.getProductid();
-                reviewproductListReviewproduct.setProductid(product);
-                reviewproductListReviewproduct = em.merge(reviewproductListReviewproduct);
-                if (oldProductidOfReviewproductListReviewproduct != null) {
-                    oldProductidOfReviewproductListReviewproduct.getReviewproductList().remove(reviewproductListReviewproduct);
-                    oldProductidOfReviewproductListReviewproduct = em.merge(oldProductidOfReviewproductListReviewproduct);
+            for (Review reviewListReview : product.getReviewList()) {
+                Product oldProductidOfReviewListReview = reviewListReview.getProductid();
+                reviewListReview.setProductid(product);
+                reviewListReview = em.merge(reviewListReview);
+                if (oldProductidOfReviewListReview != null) {
+                    oldProductidOfReviewListReview.getReviewList().remove(reviewListReview);
+                    oldProductidOfReviewListReview = em.merge(oldProductidOfReviewListReview);
                 }
             }
             utx.commit();
@@ -82,30 +82,30 @@ public class ProductJpaController implements Serializable {
             utx.begin();
             em = getEntityManager();
             Product persistentProduct = em.find(Product.class, product.getProductid());
-            List<Reviewproduct> reviewproductListOld = persistentProduct.getReviewproductList();
-            List<Reviewproduct> reviewproductListNew = product.getReviewproductList();
-            List<Reviewproduct> attachedReviewproductListNew = new ArrayList<Reviewproduct>();
-            for (Reviewproduct reviewproductListNewReviewproductToAttach : reviewproductListNew) {
-                reviewproductListNewReviewproductToAttach = em.getReference(reviewproductListNewReviewproductToAttach.getClass(), reviewproductListNewReviewproductToAttach.getReviewid());
-                attachedReviewproductListNew.add(reviewproductListNewReviewproductToAttach);
+            List<Review> reviewListOld = persistentProduct.getReviewList();
+            List<Review> reviewListNew = product.getReviewList();
+            List<Review> attachedReviewListNew = new ArrayList<Review>();
+            for (Review reviewListNewReviewToAttach : reviewListNew) {
+                reviewListNewReviewToAttach = em.getReference(reviewListNewReviewToAttach.getClass(), reviewListNewReviewToAttach.getReviewid());
+                attachedReviewListNew.add(reviewListNewReviewToAttach);
             }
-            reviewproductListNew = attachedReviewproductListNew;
-            product.setReviewproductList(reviewproductListNew);
+            reviewListNew = attachedReviewListNew;
+            product.setReviewList(reviewListNew);
             product = em.merge(product);
-            for (Reviewproduct reviewproductListOldReviewproduct : reviewproductListOld) {
-                if (!reviewproductListNew.contains(reviewproductListOldReviewproduct)) {
-                    reviewproductListOldReviewproduct.setProductid(null);
-                    reviewproductListOldReviewproduct = em.merge(reviewproductListOldReviewproduct);
+            for (Review reviewListOldReview : reviewListOld) {
+                if (!reviewListNew.contains(reviewListOldReview)) {
+                    reviewListOldReview.setProductid(null);
+                    reviewListOldReview = em.merge(reviewListOldReview);
                 }
             }
-            for (Reviewproduct reviewproductListNewReviewproduct : reviewproductListNew) {
-                if (!reviewproductListOld.contains(reviewproductListNewReviewproduct)) {
-                    Product oldProductidOfReviewproductListNewReviewproduct = reviewproductListNewReviewproduct.getProductid();
-                    reviewproductListNewReviewproduct.setProductid(product);
-                    reviewproductListNewReviewproduct = em.merge(reviewproductListNewReviewproduct);
-                    if (oldProductidOfReviewproductListNewReviewproduct != null && !oldProductidOfReviewproductListNewReviewproduct.equals(product)) {
-                        oldProductidOfReviewproductListNewReviewproduct.getReviewproductList().remove(reviewproductListNewReviewproduct);
-                        oldProductidOfReviewproductListNewReviewproduct = em.merge(oldProductidOfReviewproductListNewReviewproduct);
+            for (Review reviewListNewReview : reviewListNew) {
+                if (!reviewListOld.contains(reviewListNewReview)) {
+                    Product oldProductidOfReviewListNewReview = reviewListNewReview.getProductid();
+                    reviewListNewReview.setProductid(product);
+                    reviewListNewReview = em.merge(reviewListNewReview);
+                    if (oldProductidOfReviewListNewReview != null && !oldProductidOfReviewListNewReview.equals(product)) {
+                        oldProductidOfReviewListNewReview.getReviewList().remove(reviewListNewReview);
+                        oldProductidOfReviewListNewReview = em.merge(oldProductidOfReviewListNewReview);
                     }
                 }
             }
@@ -143,10 +143,10 @@ public class ProductJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The product with id " + id + " no longer exists.", enfe);
             }
-            List<Reviewproduct> reviewproductList = product.getReviewproductList();
-            for (Reviewproduct reviewproductListReviewproduct : reviewproductList) {
-                reviewproductListReviewproduct.setProductid(null);
-                reviewproductListReviewproduct = em.merge(reviewproductListReviewproduct);
+            List<Review> reviewList = product.getReviewList();
+            for (Review reviewListReview : reviewList) {
+                reviewListReview.setProductid(null);
+                reviewListReview = em.merge(reviewListReview);
             }
             em.remove(product);
             utx.commit();

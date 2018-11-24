@@ -6,6 +6,7 @@
 package jpa.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,13 +28,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author DEMO TEST
  */
 @Entity
-@Table(name = "REVIEWPRODUCT")
+@Table(name = "REVIEW")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Reviewproduct.findAll", query = "SELECT r FROM Reviewproduct r")
-    , @NamedQuery(name = "Reviewproduct.findByReviewid", query = "SELECT r FROM Reviewproduct r WHERE r.reviewid = :reviewid")
-    , @NamedQuery(name = "Reviewproduct.findByReviewtext", query = "SELECT r FROM Reviewproduct r WHERE r.reviewtext = :reviewtext")})
-public class Reviewproduct implements Serializable {
+    @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r")
+    , @NamedQuery(name = "Review.findByReviewid", query = "SELECT r FROM Review r WHERE r.reviewid = :reviewid")
+    , @NamedQuery(name = "Review.findByReviewtopic", query = "SELECT r FROM Review r WHERE r.reviewtopic = :reviewtopic")
+    , @NamedQuery(name = "Review.findByDescription", query = "SELECT r FROM Review r WHERE r.description = :description")
+    , @NamedQuery(name = "Review.findByReviewtime", query = "SELECT r FROM Review r WHERE r.reviewtime = :reviewtime")})
+public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,17 +44,23 @@ public class Reviewproduct implements Serializable {
     @Basic(optional = false)
     @Column(name = "REVIEWID")
     private Integer reviewid;
+    @Size(max = 50)
+    @Column(name = "REVIEWTOPIC")
+    private String reviewtopic;
     @Size(max = 250)
-    @Column(name = "REVIEWTEXT")
-    private String reviewtext;
+    @Column(name = "DESCRIPTION")
+    private String description;
+    @Column(name = "REVIEWTIME")
+    @Temporal(TemporalType.DATE)
+    private Date reviewtime;
     @JoinColumn(name = "PRODUCTID", referencedColumnName = "PRODUCTID")
     @ManyToOne
     private Product productid;
 
-    public Reviewproduct() {
+    public Review() {
     }
 
-    public Reviewproduct(Integer reviewid) {
+    public Review(Integer reviewid) {
         this.reviewid = reviewid;
     }
 
@@ -61,12 +72,28 @@ public class Reviewproduct implements Serializable {
         this.reviewid = reviewid;
     }
 
-    public String getReviewtext() {
-        return reviewtext;
+    public String getReviewtopic() {
+        return reviewtopic;
     }
 
-    public void setReviewtext(String reviewtext) {
-        this.reviewtext = reviewtext;
+    public void setReviewtopic(String reviewtopic) {
+        this.reviewtopic = reviewtopic;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getReviewtime() {
+        return reviewtime;
+    }
+
+    public void setReviewtime(Date reviewtime) {
+        this.reviewtime = reviewtime;
     }
 
     public Product getProductid() {
@@ -87,10 +114,10 @@ public class Reviewproduct implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reviewproduct)) {
+        if (!(object instanceof Review)) {
             return false;
         }
-        Reviewproduct other = (Reviewproduct) object;
+        Review other = (Review) object;
         if ((this.reviewid == null && other.reviewid != null) || (this.reviewid != null && !this.reviewid.equals(other.reviewid))) {
             return false;
         }
@@ -99,7 +126,7 @@ public class Reviewproduct implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.model.Reviewproduct[ reviewid=" + reviewid + " ]";
+        return "jpa.model.Review[ reviewid=" + reviewid + " ]";
     }
     
 }

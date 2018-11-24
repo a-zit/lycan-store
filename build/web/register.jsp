@@ -28,6 +28,10 @@
                     <form id="Register" action="Register" method="POST">
 
                         <div class="form-group">
+                            ${registeralert}
+                        </div>
+
+                        <div class="form-group">
                             <input type="text" class="form-control" id="inputUsername" placeholder="Username" name="username" required>
                         </div>
 
@@ -55,7 +59,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="zipcode" placeholder="Zipcode" name="zipcode">
                         </div>
-                        
+
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputTelno" placeholder="Tel Number" name="telno" required>
@@ -69,7 +73,7 @@
                 </div>
                 <p class="botto-text"> Designed for Lycan Store</p>
             </div>
-            
+
         </div>
         <script>
             var password = document.getElementById("password")
