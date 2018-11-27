@@ -39,13 +39,14 @@ public class LoginServlet extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
         if (customer != null) {
             session.setAttribute("customer", customer);
+            session.setAttribute("logoutshow", "Logout");
             getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
         } else {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         }
         session.setAttribute("loginalert", null);
         session.setAttribute("logoutshow", null);
-        
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         
     }
 
@@ -64,6 +65,7 @@ public class LoginServlet extends HttpServlet {
             if ( customer != null){
                 if (password.equals(customer.getPassword())){
                     request.getSession().setAttribute("customer", customer);
+                    session.setAttribute("logoutshow", "Logout");
                     getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
                     return ;
                 }

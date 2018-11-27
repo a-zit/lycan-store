@@ -32,20 +32,23 @@
 
                     <div class="card mt-4" style="padding: 10px">
                         <div class="row">
+                            <div class="col-sm-3"></div>
                             <div class="col-sm-6">
-                                <img class="card-img-top img-fluid" src="./image/1.png" alt="">
+                                <img class="card-img-top img-fluid" src="./Images/${product.productid}.png" alt="">
                             </div>
-                            <div class="col-sm-6">
-                                <img class="card-img-top img-fluid" src="./image/2.png" alt="">
-                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">Product Name</h3>
-                            <h4>$24.99</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                            <h3 class="card-title">${product.productname}</h3>
+                            <h4>Price : ${product.price} ฿ </h4>
+                            <h4>Size : ${product.productsize}</h4>
+                            <hr>
+                            <p class="card-text">${product.productdetail}</p>
+                            <hr>
                             <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                             4.0 stars
                         </div>
+                            <a href="ProductList" class="btn btn-danger">Add to Cart</a>
                     </div>
                     <!-- /.card -->
 
@@ -63,7 +66,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
                             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
                             <hr>
-                            <a href="ProductList.jsp" class="btn btn-success">Leave a item</a>
+                            <a href="ProductList" class="btn btn-success">Leave a item</a>
                         </div>
                     </div>
                     <!-- /.card -->

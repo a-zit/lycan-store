@@ -33,7 +33,7 @@
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="Login">${loginshow}</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link">${customer.username}</a></li>
+                        <li class="nav-item"><a class="nav-link"><strong class="badge badge-dark">${customer.username}</strong></a></li>
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="Logout">${logoutshow}</a>
                         </li>
