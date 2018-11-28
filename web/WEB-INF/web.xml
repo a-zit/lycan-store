@@ -17,8 +17,13 @@
         <servlet-class>Servlet.ProductListServlet</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>Servlet.SearchServlet</servlet-class>
+=======
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>Servlet.ProductDetailServlet</servlet-class>
+>>>>>>> 368614e0354091c965ee5e0a157cae1910461264
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -37,8 +42,13 @@
         <url-pattern>/ProductList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/Search</url-pattern>
+=======
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/ProductDetail</url-pattern>
+>>>>>>> 368614e0354091c965ee5e0a157cae1910461264
     </servlet-mapping>
     <session-config>
         <session-timeout>
