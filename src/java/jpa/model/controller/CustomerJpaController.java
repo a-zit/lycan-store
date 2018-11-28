@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.transaction.UserTransaction;
 import jpa.model.Customer;
 import jpa.model.controller.exceptions.NonexistentEntityException;
@@ -203,7 +204,11 @@ public class CustomerJpaController implements Serializable {
         query.setParameter("username", username);
         try {
             return (Customer)query.getSingleResult();
-        } finally {
+        }catch(NoResultException ex){
+            System.out.println(ex);
+            return null;
+        } 
+        finally {
             em.close();
         }
     }

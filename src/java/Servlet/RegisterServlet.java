@@ -58,22 +58,24 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         Customer customer = new Customer(fname, lname, street, city, statefull, zipcode, email, telno, username, password);
         CustomerJpaController controller = new CustomerJpaController(utx, emf);
-        Customer customerformdb = controller.findCustomerUsername(username);
 
-        if (customer.getUsername().equals(customerformdb.getUsername())) {
-            session.setAttribute("registeralert", "Username already use, Please Change username");
-            getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
-            System.out.println("case1");
-        } else if (customer.getMail().equals(customerformdb.getMail())) {
-            session.setAttribute("registeralert", "Email already use, Please Change Email");
-            getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
-             System.out.println("case2");
-        }
-        else {
+        if (controller.findCustomerUsername(username) != null) {
+            Customer customerformdb = controller.findCustomerUsername(username);
+            if (customer.getUsername().equals(customerformdb.getUsername())) {
+                session.setAttribute("registeralert", "Username already use, Please Change username");
+                response.sendRedirect("Register");
+            }
+            if (customer.getMail().equals(customerformdb.getMail())) {
+                session.setAttribute("registeralert", "Email already use, Please Change Email");
+                response.sendRedirect("Register");
+            }
+        } else {
             try {
-                 System.out.println("case3");
                 controller.create(customer);
-                 session.setAttribute("registeralert", null);
+                session.setAttribute("customer", customer);
+                session.setAttribute("registeralert", null);
+                session.setAttribute("logoutshow", "Logout");
+
             } catch (Exception ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

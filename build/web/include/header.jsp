@@ -24,8 +24,8 @@
                 </a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-inline my-2 my-lg-0 mr-5" >
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0 mr-5" action="Search" method="post" >
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchinput">
                             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         <li class="nav-item"><a class="nav-link" href="favorite.jsp">Favorite</a></li>
@@ -37,6 +37,7 @@
                         <li class="nav-item">
                             <a id="myBtn" class="cursor nav-link" href="Logout">${logoutshow}</a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
